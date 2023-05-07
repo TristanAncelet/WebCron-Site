@@ -4,7 +4,7 @@
 -->
 <html>
     <head>
-        <link rel="sytlesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main.css">
         <title>This is a test</title>
     </head>
     </body>
