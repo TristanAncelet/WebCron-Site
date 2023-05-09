@@ -19,8 +19,7 @@
 
             <div class="menu_bar bordered_right cell">
                 <button class="menu_button"> Check Logs </button>
-                <button class="menu_button"> View Crontabs </button>
-                <button class="menu_button"> Generate Crontab </button>
+                <button class="menu_button"> View Crontab Statistics</button>
             </div>
 
             <div class="content cell">
