@@ -9,3 +9,5 @@ function setInfoSection (string) {
     var info_section = document.getElementById("content");
     info_section.innerHTML = request_sqlite_version();
 }
+
+

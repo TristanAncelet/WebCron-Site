@@ -26,6 +26,16 @@
 
             <div id="content" class="content cell">
                 Test
+                <br>
+                <?php
+                $user=shell_exec("whoami");
+                echo "User: $user<br>";
+                $db = new SQLite3('../webcron.db');
+                $res = $db->querySingle("SELECT COUNT(job_id) FROM job_history;");
+                echo "Job History Entries: $res<br>";
+                $res = $db->querySingle("SELECT COUNT(log_id) FROM logs;");
+                echo "Log Entries: $res<br>";
+                ?>
             </div>
 
             <div class="double_width_menu_bar bordered_left cell">
@@ -36,15 +46,15 @@
                             <div class="table_header">Level</div>
                             <div class="table_header"># of occurances</div>
                         </div>
-                        <div class="table_row">
-                            <div class="table_cell">Warning</div> <div class="table_cell">N/A</div>
-                        </div>
-                        <div class="table_row">
-                            <div class="table_cell">Critical</div> <div class="table_cell">N/A</div>
-                        </div>
-                        <div class="table_row">
-                            <div class="table_cell">Info</div> <div class="table_cell">N/A</div>
-                        </div>
+                        <?php
+                        $db = new SQLite3('../webcron.db');
+                        $res = $db->query("SELECT * FROM log_statistics_last_7_days;");
+                        while ($row = $res->fetchArray()){
+                            echo "<div class='table_row'>";
+                            echo "<div class='table_cell'>{$row['log_level_name']}</div> <div class='table_cell'>{$row['count']}</div>";
+                            echo "</div>";
+                        }
+                        ?>
                     </div>
                 </div>
 
@@ -52,8 +62,17 @@
                     Script Failures (Last 10)
                     <div id="script_failures" class="log_table">
                         <div class="table_row">
-                            <div class="table_header">Date</div> <div class="table_header">Script</div>
+                            <div class="table_header">Date/Time</div> <div class="table_header">Script</div> <div class="table_header">Exit Code</div> 
                         </div>
+                        <?php
+                            $db = new SQLite3('../webcron.db');
+                            $res = $db->query("SELECT * FROM last_ten_failed_jobs;");
+                            while ($row = $res->fetchArray()){
+                                echo "<div class='table_row'>";
+                                echo "<div class='table_cell'>{$row['job_timestamp']}</div> <div class='table_cell'>{$row['job_source']}</div><div class='table_cell'>{$row['job_exit_code']}</div>";
+                                echo "</div>";
+                            }
+                        ?>
                     </div>
                 </div>
 
@@ -61,8 +80,17 @@
                     Jobs Run (Last 10)
                     <div id="jobs_run_table" class="log_table">
                         <div class="table_row">
-                            <div class="table_header">Date/Time</div> <div class="table_header">Script</div>
+                            <div class="table_header">Date/Time</div> <div class="table_header">Script</div> <div class="table_header">Exit Code</div> <div class="table_header">Job Result</div>
                         </div>
+                        <?php
+                            $db = new SQLite3('../webcron.db');
+                            $res = $db->query("SELECT * FROM job_history ORDER BY job_timestamp DESC LIMIT 10;");
+                            while ($row = $res->fetchArray()){
+                                echo "<div class='table_row'>";
+                                echo "<div class='table_cell'>{$row['job_timestamp']}</div> <div class='table_cell'>{$row['job_source']}</div><div class='table_cell'>{$row['job_exit_code']}</div><div class='table_cell'>{$row['job_result']}</div>";
+                                echo "</div>";
+                            }
+                        ?>
                     </div>
                 </div>
 
