@@ -6,6 +6,7 @@
     <head>
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <link rel="stylesheet" href="css/main.css">
+        <script src="main.js"> </script>
         <title>This is a test</title>
     </head>
     <body>
@@ -20,19 +21,11 @@
             <div class="menu_bar bordered_right cell">
                 <button class="menu_button"> Check Logs </button>
                 <button class="menu_button"> View Crontab Statistics</button>
+                <button class="menu_button" onclick="setInfoSection()"> View Database Version</button>
             </div>
 
-            <div class="content cell">
-                test
-                <?php
-                echo "<br>";
-                echo "<ul>";
-                for ($x = 0; $x <= 10; $x++){
-                    echo "<li> Hey there $x </li>";
-                }
-                echo "</ul>";
-                ?>
- 
+            <div id="content" class="content cell">
+                Test
             </div>
 
             <div class="double_width_menu_bar bordered_left cell">
