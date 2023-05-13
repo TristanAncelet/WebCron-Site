@@ -7,13 +7,20 @@
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <link rel="stylesheet" href="css/main.css">
         <script src="main.js"> </script>
-        <title>This is a test</title>
+        <title>Overview</title>
     </head>
     <body>
         <nav>
-            <a class="nav-button" href='/'>Logs/Statistics</a>
-            <a class="nav-button" href='/crontabs.php'>Crontab Management</a>
-            <a class="nav-button" href='contact.php'>Contact</a>
+            <a class='nav-button' href='index.php'>Log Management</a>
+            <?php
+                $items = scandir(".");
+                foreach ($items as $item){
+                    if (preg_match('/\.php$/', $item) && $item != "index.php"){
+                        $item_name=ucfirst(explode('.', $item)[0]);
+                        echo  "<a class='nav-button' href='$item'>$item_name Management</a>";
+                    }
+                }
+            ?>
         </nav>
 
         <div class="content_area bordered rounded_border">
