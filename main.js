@@ -1,13 +1,30 @@
-function request_sqlite_version () {
+function setDatabaseVersion() {
+    url = 'http://localhost:8000/api/database_version.php';
+    response = makeRequest(url);
+    setInfoSection(response);
+}
+
+
+function makeRequest(url){
     var request = new XMLHttpRequest();
-    request.open("GET", 'http://localhost:8000/database_version.php', false);
+    request.open("GET", url, false);
     request.send(null);
     return request.responseText;
 }
 
-function setInfoSection (string) {
-    var info_section = document.getElementById("content");
-    info_section.innerHTML = request_sqlite_version();
+function setCrontabStats(){
+    url = "http://localhost:8000/api/crontab_stats.php";
+    response = makeRequest(url);
+    setInfoSection(response);
 }
 
+function setInfoSection (string) {
+    var info_section = document.getElementById("content");
+    info_section.innerHTML = string;
+}
 
+function getTable(name){
+    url = "http://localhost:8000/api/table.php?name=" + name;
+    response = makeRequest(url);
+    setInfoSection(response);
+}
