@@ -1,5 +1,5 @@
 <?php
-echo "Total Crontabs:<br>";
-$crontab_counts=shell_exec('../../Scripts/count-crontabs.sh');
-echo "$crontab_counts";
+$db = new SQLite3("../../webcron.db");
+$res = $db->querySingle("SELECT COUNT(*) FROM crontabs");
+echo "Total Crontabs:$res<br>";
 ?>
