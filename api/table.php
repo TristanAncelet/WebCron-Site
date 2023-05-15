@@ -5,6 +5,7 @@ This endpoint will get specific tables from the db
 Args will be:
   name: Table Name
   limit: number of entries to return (default all)
+  columns: This will be a comma delimited list of column names (in the order that it needs to be displayed)
 */
 if ( ! array_key_exists("name", $_GET) ){
     echo "A tablename was not provided with the request";
@@ -17,6 +18,11 @@ if ( array_key_exists("limit", $_GET)){
     $limit=$_GET['limit'];
 } else {
     $limit=0;
+}
+
+if ( array_key_exists("columns", $_GET)){
+    echo $_GET["columns"];
+    $columns = explode(',', $_GET["columns"]);
 }
 
 $query_modifier="";
@@ -35,20 +41,32 @@ if (filter_var($limit, FILTER_VALIDATE_INT)){
     echo '<div class="log_table bordered">';
         echo '<div class="table_row">';
 
-        $counter=0;
-        for ($i = 0; $i < $res->numColumns(); $i++ ){
-            echo "<div class=\"table_header\">{$res->columnName($i)}</div>";
-            $counter++;
+        if ( !empty($columns) ) {
+            foreach($columns as $column_name){
+                echo "<div class=\"table_header\">{$column_name}</div>";
+            }
+        } else {
+            $counter=0;
+            for ($i = 0; $i < $res->numColumns(); $i++ ){
+                echo "<div class=\"table_header\">{$res->columnName($i)}</div>";
+                $counter++;
+            }
         }
+
 
         echo '</div>';
         while ($row = $res->fetchArray()){
             echo "<div class=\"table_row\">";
 
-            for ($i = 0; $i < $counter; $i++){
-                echo "<div class=\"table_cell\">{$row[$i]}</div>";
+            if ( !empty($columns) ) {
+                foreach($columns as $column_name){
+                    echo "<div class=\"table_cell\">{$row[$column_name]}</div>";
+                }
+            } else {
+                for ($i = 0; $i < $counter; $i++){
+                    echo "<div class=\"table_cell\">{$row[$i]}</div>";
+                }
             }
-
             echo "</div>";
         }
     echo '</div>';

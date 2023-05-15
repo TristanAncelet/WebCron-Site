@@ -26,9 +26,7 @@
         <div class="content_area bordered rounded_border">
 
             <div class="menu_bar bordered_right cell">
-                <button class="menu_button"> Check Logs </button>
-                <button class="menu_button"> View Crontab Statistics</button>
-                <button class="menu_button" onclick="setInfoSection()"> View Database Version</button>
+                <button class="menu_button" onclick="getLogHistory()"> Check Logs </button>
             </div>
 
             <div id="content" class="content cell">
