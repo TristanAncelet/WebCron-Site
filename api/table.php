@@ -21,7 +21,6 @@ if ( array_key_exists("limit", $_GET)){
 }
 
 if ( array_key_exists("columns", $_GET)){
-    echo $_GET["columns"];
     $columns = explode(',', $_GET["columns"]);
 }
 
