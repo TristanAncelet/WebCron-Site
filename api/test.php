@@ -1,5 +1,5 @@
 <?php
 
-echo shell_exec("uname -a");
+echo shell_exec("../../Scripts/count-crontabs.sh");
 
 ?>
