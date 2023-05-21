@@ -30,7 +30,7 @@
 
             <div class="menu_bar bordered_right cell">
                 <button class="menu_button" onclick="setDatabaseVersion()"> View Database Version</button>
-                <button class="menu_button" onclick="setTableNames()"> View Tables </button>
+                <button class="menu_button" onclick="listTables()"> View Tables </button>
             </div>
 
             <div id="content" class="content cell">

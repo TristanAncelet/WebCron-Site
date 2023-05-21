@@ -13,9 +13,9 @@
 
     switch ($action) {
         case "list":
-            $res = $db->query("SELECT crontab_path FROM crontabs;");
+            $res = $db->query("SELECT crontab_id, crontab_path FROM crontabs;");
             while ($row = $res->fetchArray()){
-                exit;
+                echo "<button onclick=loadCrontab({$row['crontab_id']})>{$row['crontab_path']}</button><br>";
             }
             break;
     } 

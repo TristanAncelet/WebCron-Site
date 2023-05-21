@@ -29,7 +29,7 @@
             <div class="menu_bar bordered_right cell">
                 <button class="menu_button" onclick="setCrontabStats()"> View Crontab Statistics </button>
                 <button class="menu_button" onclick="getTable('job_history')">View Script Run History</button>
-                <button class="menu_button" onclick="getCrontabs()">View Crontabs</button>
+                <button class="menu_button" onclick="listCrontabs()">View Crontabs</button>
                 <button class="menu_button" onclick="test()">Test</button>
             </div>
 

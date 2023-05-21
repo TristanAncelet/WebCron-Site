@@ -1,24 +1,27 @@
 <?php
     /*
     GET Variables
-        name: Name of crontab
+      Optional:
+        id: id of the crontab
     */
     $GLOBALS['db'] = new SQLite3('../../webcron.db');
     
-    if (!array_key_exists("name", $_GET)) {
+    if (!array_key_exists("id", $_GET)) {
         $name = "";
     } else {
-        $name = $_GET["name"];
+        $id = $_GET["id"];
     }
 
     $db = $GLOBALS['db'];
-    $id = $db->querySingle("select crontab_id from crontabs where crontab_path like '%/$name';");
     
     if (empty($id)){
         echo "$name is not a valid crontab";
     } else {
         $data = $db->querySingle("SELECT crontab_data FROM crontabs WHERE crontab_id = $id;");
-        echo "$data";
+        $lines = explode("\n", $data);
+        foreach ($lines as $line){
+            echo "$line<br>";
+        }
     }
 
 
