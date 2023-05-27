@@ -1,7 +1,7 @@
 <?php
 
+namespace table;
 require("class.php");
-use table\Table;
 function get_main () {
     $db = $GLOBALS["db"];
     /*
