@@ -1,5 +1,6 @@
 <?php
+include("../../Libraries/test.php");
 
-echo shell_exec("../../Scripts/count-crontabs.sh");
+test_func();
 
 ?>
