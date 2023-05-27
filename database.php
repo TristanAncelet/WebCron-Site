@@ -1,3 +1,9 @@
+<?php
+$root = $_SERVER['DOCUMENT_ROOT'];
+require "$root/Libraries/table/class.php";
+use table\Table;
+$db = new SQLite3("../webcron.db");
+?>
 <!Doctype html>
 <!-- 
     Color pallet: https://colorhunt.co/palette/b9eddd87cbb9569daa577d86 
@@ -37,6 +43,7 @@
             </div>
 
             <div class="double_width_menu_bar bordered_left cell">
+                
             </div>
         </div>
 

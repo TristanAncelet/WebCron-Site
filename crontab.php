@@ -1,4 +1,9 @@
-
+<?php
+$root = $_SERVER['DOCUMENT_ROOT'];
+require "$root/Libraries/table/class.php";
+use table\Table;
+$db = new SQLite3("../webcron.db");
+?>
 <!Doctype html>
 <html>
     <head>
@@ -36,28 +41,23 @@
             <div id="content" class="content cell">
            </div>
 
-            <div class="double_width_menu_bar bordered_left cell">
-                <div class="wrapper bordered center_text">
-                    All Crontabs
-                    <div id="log_statistics_table" class="log_table bordered">
-                        <div class="table_row">
-                            <div class="table_header">Crontab</div> <div class="table_header">Created At</div><div class="table_header">Last Modified</div>
-                        </div>
-                        <?php
-                        $db = new SQLite3('../webcron.db');
-                        $res = $db->query("SELECT crontab_path, crontab_created_timestamp, crontab_modified_timestamp FROM crontabs;");
+        <div class="double_width_menu_bar bordered_left cell">
+           <?php
+           $columns = array(
+            'crontab_path AS "Crontab Path"',
+            'crontab_created_timestamp AS "Created At"',
+            'crontab_modified_timestamp AS "Last Modified At"'
+           );
+           $table = new Table("crontabs");
+           $table->set_pretty_name("Crontabs");
+           $query = $table->get_query();
+           $query->set_columns($columns);
+           $table->Load($db);
+           echo $table->get_html();
+           ?>
 
-                        while ($row = $res->fetchArray()){
-                            echo "<div class=\"table_row\">";
-                            echo "<div class=\"table_cell\">{$row['crontab_path']}</div> <div class=\"table_cell\">{$row['crontab_created_timestamp']}</div><div class=\"table_cell\">{$row['crontab_modified_timestamp']}</div>";
-                            echo "</div>";
-                        }
-                        ?>
-                    </div>
-                </div>
-
-            </div>
         </div>
+    </div>
 
    </body>
 </html>

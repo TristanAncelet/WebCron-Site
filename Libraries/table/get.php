@@ -1,6 +1,7 @@
 <?php
 
 require("class.php");
+use table\Table;
 function get_main () {
     $db = $GLOBALS["db"];
     /*

@@ -1,5 +1,9 @@
 <?php
-require("../Libraries/db/query.php");
+
+namespace table;
+$root = $_SERVER['DOCUMENT_ROOT'];
+include("$root/Libraries/db/query.php");
+use db\Query;
 
 class Table_Cell {
     private $formats = array(
@@ -62,6 +66,7 @@ class Table_Row {
 class Table {
     private Query $query;
     private $name;
+    private $pretty_name;
     private $headers;
     private $rows = array();
 
@@ -82,6 +87,18 @@ class Table {
 
     public function set_name($name){
         $this->name = $name;
+    }
+
+    public function set_pretty_name(string $pretty_name){
+        $this->pretty_name = $pretty_name;
+    }
+
+    public function get_pretty_name(){
+        $output=$this->name;
+        if (!empty($this->pretty_name)){
+            $output=$this->pretty_name;
+        }
+        return $output;
     }
  
     public function Load($db){
@@ -108,7 +125,7 @@ class Table {
     }
     public function get_html(){
         $output="";
-        $output="{$output}<div class=\"wrapper bordered center_text\">"; 
+        $output="{$output}<div class=\"wrapper bordered center_text\">{$this->get_pretty_name()}"; 
         $output="{$output}<div class=\"log_table bordered\">";         
 
         foreach ($this->rows as $row){

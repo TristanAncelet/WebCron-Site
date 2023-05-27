@@ -1,8 +1,11 @@
 <?php
+namespace db;
+
 class Query {
     private $table_name;
     private array $columns_querying = array();
     private int $limit=0;
+    private string $order_by;
 
     public function __construct(string $table_name){
         $this->table_name = $table_name;
@@ -17,6 +20,10 @@ class Query {
         if ($limit > 0){
             $this->limit = $limit;
         }
+    }
+
+    public function set_order_by_column (string $order_by){
+        $this->order_by = $order_by;
     }
 
     private function get_columns(){
@@ -39,13 +46,21 @@ class Query {
         return $modifier;
     }
 
+    private function get_order_by(){
+        $order_by="";
+        if (!empty($this->order_by)){
+            $order_by=" ORDER BY {$this->order_by}";
+        }
+        return $order_by;
+    }
+
     private function get_where() {
         $where = "";
         return $where;
     }
 
     public function get_query_string(){
-        $query = "SELECT {$this->get_columns()} FROM {$this->table_name}{$this->get_where()}{$this->get_limit()};";
+        $query = "SELECT {$this->get_columns()} FROM {$this->table_name}{$this->get_where()}{$this->get_order_by()}{$this->get_limit()};";
         return $query;
     }
 
