@@ -1,4 +1,5 @@
 <?php
+require("../Libraries/db/query.php");
 
 class Table_Cell {
     private $formats = array(
@@ -59,12 +60,18 @@ class Table_Row {
 }
 
 class Table {
+    private Query $query;
     private $name;
     private $headers;
     private $rows = array();
 
     public function __construct($name){
         $this->set_name($name);
+        $this->query = new Query($name);
+    }
+
+    public function get_query(){
+        return $this->query;
     }
 
     private function add_row(){
@@ -77,8 +84,8 @@ class Table {
         $this->name = $name;
     }
  
-    public function Load($db, $query_modifier){
-        $res = $db->query("SELECT * FROM $this->name $query_modifier");
+    public function Load($db){
+        $res = $db->query($this->query->get_query_string());
 
         // Getting header row
         $col_count=0;

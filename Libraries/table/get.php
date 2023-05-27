@@ -28,6 +28,8 @@ function get_main () {
                 return 1;
             } else {
                 $name=$_GET['name'];
+                $table = new Table($name);
+                $query = $table->get_query();
             }
 
             if ( array_key_exists("limit", $_GET)){
@@ -36,9 +38,13 @@ function get_main () {
                 $limit=0;
             }
 
+            $query->set_limit($limit);
+
             if ( array_key_exists("columns", $_GET)){
                 $columns = explode(',', $_GET["columns"]);
             }
+
+            $query->set_columns($columns);
             // END: Get show args
 
             $query_modifier="";
@@ -49,39 +55,10 @@ function get_main () {
                 }else {
                     $query_modifier="";
                 }
+                $table->Load($db);
+                $output = $table->get_html();
+                echo $output;
 
-                $res = $db->query("SELECT * FROM $name $query_modifier");
-                echo '<div class="wrapper bordered center_text">'; 
-                echo '<div class="log_table bordered">'; 
-                echo '<div class="table_row">';
-                    if ( !empty($columns) ) {
-                        foreach($columns as $column_name){
-                            echo "<div class=\"table_header\">{$column_name}</div>";
-                        }
-                    } else {
-                        $counter=0;
-                        for ($i = 0; $i < $res->numColumns(); $i++ ){
-                            echo "<div class=\"table_header\">{$res->columnName($i)}</div>";
-                            $counter++;
-                        }
-                    }
-
-                    echo '</div>';
-                    while ($row = $res->fetchArray()){
-                        echo "<div class=\"table_row\">";
-                        if ( !empty($columns) ) {
-                            foreach($columns as $column_name){
-                                echo "<div class=\"table_cell\">{$row[$column_name]}</div>";
-                            }
-                        } else {
-                            for ($i = 0; $i < $counter; $i++){
-                                echo "<div class=\"table_cell\">{$row[$i]}</div>";
-                            }
-                        }
-                        echo "</div>";
-                    }
-                echo '</div>';
-                echo '</div>';
             break;
     
     case "list":
