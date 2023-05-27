@@ -34,7 +34,7 @@ $db = new SQLite3("../webcron.db");
 
         <div class="content_area bordered rounded_border">
 
-            <div class="menu_bar bordered_right cell">
+            <div class="single_width menu_bar bordered_right cell border_rounded_left">
                 <button class="menu_button" onclick="setDatabaseVersion()"> View Database Version</button>
                 <button class="menu_button" onclick="listTables()"> View Tables </button>
             </div>
@@ -42,8 +42,8 @@ $db = new SQLite3("../webcron.db");
             <div id="content" class="content cell">
             </div>
 
-            <div class="double_width_menu_bar bordered_left cell">
-                
+            <div class="double_width menu_bar bordered_left cell border_rounded_right">
+
             </div>
         </div>
 

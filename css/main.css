@@ -16,6 +16,7 @@ body {
     border-radius: 5px;
     border: 1px solid black;
     padding: 0.5rem 1.2rem;
+    margin-right: 0.5rem;
 }
 
 .nav-button:hover {
@@ -38,10 +39,6 @@ body {
 }
 
 .content_area {
-    /*
-    display: flex;
-    flex-direction: row;
-    */
     display: table;
     width: 100%;
 }
@@ -52,12 +49,12 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.double_width_menu_bar {
-    display: flexbox;
-    background-color: #569DAA;
-    padding: 1rem;
+.single_width {
+    width: 15rem;
+}
+
+.double_width {
     width: 30rem;
-    margin-right: 1rem;
 }
 
 .wrapper {
@@ -78,6 +75,7 @@ body {
     display: table-cell;
     text-align: center;
     background-color: #bcc5c3;
+    padding: 0.2rem;
 }
 
 .table_header:not(:last-child){
@@ -99,6 +97,7 @@ body {
 
 .table_cell {
     display: table-cell;
+    padding: 0.2rem;
 }
 
 .table_cell:not(:last-child){
@@ -107,10 +106,24 @@ body {
 
 .menu_bar {
     display: flexbox;
+    visibility: visible;
     background-color: #569DAA;
     padding: 1rem;
-    width: 10rem;
     margin-right: 1rem;
+}
+
+.menu_bar.double_width:not(:has(.log_table)){
+    display:none;
+    visibility: hidden;
+}
+
+
+.border_rounded_left {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.border_rounded_right {
+    border-radius: 0px 5px 5px 0px;
 }
 
 .cell {

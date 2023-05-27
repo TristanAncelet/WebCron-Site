@@ -19,7 +19,7 @@ $db = new SQLite3("../webcron.db");
         <nav>
             <a class='nav-button' href='index.php'>Log Management</a>
             <?php
-                $items = scandir(".");
+                $items = scandir($root);
                 foreach ($items as $item){
                     if (preg_match('/\.php$/', $item) && $item != "index.php"){
                         $item_name=ucfirst(explode('.', $item)[0]);
@@ -31,7 +31,7 @@ $db = new SQLite3("../webcron.db");
 
         <div class="content_area bordered rounded_border">
 
-            <div class="menu_bar bordered_right cell">
+            <div class="single_width menu_bar bordered_right cell border_rounded_left">
                 <button class="menu_button" onclick="setCrontabStats()"> View Crontab Statistics </button>
                 <button class="menu_button" onclick="getTable('job_history')">View Script Run History</button>
                 <button class="menu_button" onclick="listCrontabs()">View Crontabs</button>
@@ -41,7 +41,7 @@ $db = new SQLite3("../webcron.db");
             <div id="content" class="content cell">
            </div>
 
-        <div class="double_width_menu_bar bordered_left cell">
+        <div class="double_width menu_bar bordered_left cell border_rounded_right">
            <?php
            $columns = array(
             'crontab_path AS "Crontab Path"',

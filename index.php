@@ -10,7 +10,6 @@ $db = new SQLite3("../webcron.db");
 -->
 <html>
     <head>
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
         <link rel="stylesheet" href="css/main.css">
         <script src="main.js"> </script>
         <title>Overview</title>
@@ -31,7 +30,7 @@ $db = new SQLite3("../webcron.db");
 
         <div class="content_area bordered rounded_border">
 
-            <div class="menu_bar bordered_right cell">
+            <div class="single_width menu_bar bordered_right cell border_rounded_left">
                 <button class="menu_button" onclick="getLogHistory()"> Check Logs </button>
             </div>
 
@@ -48,20 +47,16 @@ $db = new SQLite3("../webcron.db");
                 ?>
             </div>
 
-            <div class="double_width_menu_bar bordered_left cell">
+            <div class="double_width menu_bar bordered_left cell border_rounded_right">
                 <?php
                 $table = new Table("log_statistics_last_7_days");
                 $table->set_pretty_name("Log Statistics (Last 7 Days)");
-                $query = $table->get_query();
                 $table->Load($db);
-                echo $query->get_query_string();
                 echo $table->get_html();
 
                 $table = new Table("last_ten_failed_jobs");
                 $table->set_pretty_name("Script Failures (Last 10)");
-                $query = $table->get_query();
                 $table->Load($db);
-                echo $query->get_query_string();
                 echo $table->get_html();
                 
 
@@ -71,7 +66,6 @@ $db = new SQLite3("../webcron.db");
                 $query->set_order_by_column("job_timestamp DESC");
                 $query->set_limit(10);
                 $table->Load($db);
-                echo $query->get_query_string();
                 echo $table->get_html();
                 ?>
             </div>
