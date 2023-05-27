@@ -1,6 +1,9 @@
 <?php
-include("../../Libraries/test.php");
+include("../Libraries/table/class.php");
+$db = new SQLite3("../../webcron.db");
+$table = new Table("crontabs");
 
-test_func();
+$table->Load($db, "");
 
+echo $table->get_html();
 ?>

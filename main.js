@@ -50,7 +50,7 @@ function loadCrontab (id){
 }
 
 function test (){
-    url = "/api/crontab_view.php?name=0hourly";
+    url = "/api/test.php";
     setAreaByUrl(url);
 }
 
