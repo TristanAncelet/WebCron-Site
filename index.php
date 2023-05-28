@@ -10,13 +10,13 @@ $db = new SQLite3("../webcron.db");
 -->
 <html>
     <head>
-        <link rel="stylesheet" href="css/main.css">
-        <script src="main.js"> </script>
+        <link rel="stylesheet" href="/css/main.css">
+        <script src="/js/main.js"> </script>
         <title>Overview</title>
     </head>
     <body>
         <nav>
-            <a class='nav-button' href='index.php'>Log Management</a>
+            <a class='nav-button' href='/index.php'>Log Management</a>
             <?php
                 $items = scandir(".");
                 foreach ($items as $item){
@@ -26,6 +26,7 @@ $db = new SQLite3("../webcron.db");
                     }
                 }
             ?>
+            <a class='nav-button' href='admin/index.php'>Administration</a>
         </nav>
 
         <div class="content_area bordered rounded_border">

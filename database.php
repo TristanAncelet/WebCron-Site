@@ -11,8 +11,8 @@ $db = new SQLite3("../webcron.db");
 <html>
     <head>
         <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-        <link rel="stylesheet" href="css/main.css">
-        <script src="main.js"> </script>
+        <link rel="stylesheet" href="/css/main.css">
+        <script src="/js/main.js"> </script>
         <title><?php 
         $filename = ucfirst(explode('.',basename($_SERVER['SCRIPT_FILENAME']))[0]);
         echo $filename;
@@ -20,7 +20,7 @@ $db = new SQLite3("../webcron.db");
     </head>
     <body>
         <nav>
-            <a class='nav-button' href='index.php'>Log Management</a>
+            <a class='nav-button' href='/index.php'>Log Management</a>
             <?php
                 $items = scandir(".");
                 foreach ($items as $item){
@@ -30,6 +30,7 @@ $db = new SQLite3("../webcron.db");
                     }
                 }
             ?>
+            <a class='nav-button' href='/admin/index.php'>Administration</a>
         </nav>
 
         <div class="content_area bordered rounded_border">
